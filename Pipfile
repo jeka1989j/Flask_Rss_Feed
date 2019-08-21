@@ -10,6 +10,7 @@ pylint = "*"
 
 [packages]
 flask = "*"
+feedparser = "*"
 
 [requires]
 python_version = "3.7"
