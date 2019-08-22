@@ -1,8 +1,12 @@
-from flask import Flask
-
-app = Flask(__name__)
+from feed_parser import parserfile
 
 
-@app.route('/')
-def index():
-    return f'Hello user'
+# app = Flask(__name__)
+
+
+# @app.route('/')
+# def index():
+#     return f'Hello user'
+
+if __name__ == "__main__":
+    parserfile.run()
