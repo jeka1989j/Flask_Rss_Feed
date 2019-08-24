@@ -1,5 +1,6 @@
 import feedparser
-from flask import Flask
+from flask import Flask, render_template
+
 
 app = Flask(__name__)
 
@@ -22,14 +23,25 @@ rss_feeds = {
 @app.route('/<feed_name>')
 def get_news(feed_name='bbc'):
     feed = feedparser.parse(rss_feeds[feed_name])
-    first_article = feed['entries'][0]
-    return """<html>
-    <body>
-    <h1>{3} Feed News</h1>
-    <b>{0}</b></br>
-    <p>{1}</p></br>
-    <i>{2}</i>
-    </body>
-    </html>
-    """.format(first_article.get("title"), first_article.get('summary'),
-               first_article.get('published'), feed_name.upper())
+    # first_article = feed['entries'][0]
+    # title = first_article.get('title')
+    # summary = first_article.get('summary')
+    # published = first_article.get('published')
+    # link = first_article.get('link')
+    # # return """<html>
+    # <body>
+    # <h1>{3} Feed News</h1>
+    # <b>{0}</b></br>
+    # <p>{1}</p></br>
+    # <i>{2}</i>
+    # </body>
+    # </html>
+    # """.format(first_article.get("title"), first_article.get('summary'),
+    #            first_article.get('published'), feed_name.upper())
+    # return render_template('feed_news.html', article = first_article)
+    # And after that we only need call it in template like
+    # {{article.title}}, {{article.summary}} etc.
+    # return render_template('feed_news.html', title=title, summary=summary,
+    #    published=published, link=link)
+
+    return render_template('feed_news.html', news=feed['entries'])
