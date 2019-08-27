@@ -1,6 +1,6 @@
 import feedparser
 from flask import Flask, render_template, request
-
+from .parse_weather import get_weather
 
 app = Flask(__name__)
 
@@ -21,14 +21,17 @@ rss_feeds = {
 
 # @app.route('/<feed_name>')
 # def get_news(feed_name='bbc', methods=['GET', 'POST']):
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def get_news():
-    feed_name = request.args.get('news_feed')
+    feed_name = request.form.get('news_feed')
     if not feed_name or feed_name.lower() not in rss_feeds:
         news_feed = 'bbc'
     else:
         news_feed = feed_name.lower()
     feed = feedparser.parse(rss_feeds[news_feed])
+    weather = get_weather('Kyiv')
+    # <img src="http://openweathermap.org/img/wn/01d@2x.png" width="50" height="50">
+    # url = f'http://openweathermap.org/img/wn/{weather_icon}@2x.png'
     # first_article = feed['entries'][0]
     # title = first_article.get('title')
     # summary = first_article.get('summary')
@@ -49,4 +52,4 @@ def get_news():
     # {{article.title}}, {{article.summary}} etc.
     # return render_template('feed_news.html', title=title, summary=summary,
     #    published=published, link=link)
-    return render_template('feed_news.html', news=feed['entries'])
+    return render_template('feed_news.html', news=feed['entries'], weather=weather)

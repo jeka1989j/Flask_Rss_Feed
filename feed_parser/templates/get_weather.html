@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    {% block weather %}
+    <div>
+        <h2>Current weather: </h2>
+        <p>City: <b>{{weather.city}}</b></p>
+        <p>{{weather.description}} <img src="http://openweathermap.org/img/wn/{{weather.icon}}@2x.png" width="50"
+                height="50">{{weather.temperature}}&#8451;</p>
+    </div>
+
+    {% endblock %}
+</body>
+
+</html>

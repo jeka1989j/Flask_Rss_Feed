@@ -5,12 +5,12 @@ verify_ssl = true
 
 [dev-packages]
 autopep8 = "*"
-black = "*"
 pylint = "*"
 
 [packages]
 flask = "*"
 feedparser = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
