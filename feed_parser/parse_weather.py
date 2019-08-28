@@ -12,10 +12,12 @@ def get_weather(query):
     # print(read_data)
     data = requests.get(req_url)
     read_data = data.json()
+    weather = None
     if read_data.get('weather'):
         weather = {"description": read_data['weather'][0]['description'],
                    "temperature": read_data['main']['temp'],
                    "city": read_data['name'],
+                   "country": read_data['sys']['country'],
                    "icon": read_data['weather'][0]['icon']
                    }
     return weather
