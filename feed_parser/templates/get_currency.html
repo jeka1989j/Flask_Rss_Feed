@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    {% block currency %}
+    <div>
+        <h2>Currency: </h2>
+        <div>
+            1 {{currency_from|upper}} = {{currency_to|upper}} {{rate}}
+        </div>
+        <form>
+            <div class="form-group mb-2 mt-2">
+                from: <select name="currency_from">
+                    {% for currency in currencies %}
+                    <option value="{{currency}}" {{'selected="selected"' if currency_from==currency}}>{{currency}}
+                    </option>
+                    {% endfor %} </select> to: <select name="currency_to">
+                    {% for currency in currencies %}
+                    <option value="{{currency}}" {{'selected="selected"' if currency_to==currency}}>{{currency}}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <small class="form-text mb-1">Chosen currency what you want to rate</small>
+                <button type="submit" class="btn btn-primary btn-sm m-2">Submit</button>
+            </div>
+        </form>
+        {% endblock %}
+</body>
+
+</html>

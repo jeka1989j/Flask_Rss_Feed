@@ -1,6 +1,7 @@
 import feedparser
 from flask import Flask, render_template, request
 from .parse_weather import get_weather
+from .parse_currency import get_currency
 
 app = Flask(__name__)
 
@@ -12,7 +13,8 @@ rss_feeds = {
     'iol': 'http://www.iol.co.za/cmlink/1.640'
 }
 
-default = {'feed_name': 'bbc', 'city': 'Kyiv'}
+default = {'feed_name': 'bbc', 'city': 'Kyiv',
+           'currency_from': 'usd', 'currency_to': 'uah'}
 
 
 @app.route('/')
@@ -25,7 +27,16 @@ def home():
     if not city:
         city = default['city']
     weather = get_weather(city)
-    return render_template('feed_news.html', news=articles, weather=weather)
+    currency_from = request.args.get('currency_from')
+    if not currency_from:
+        currency_from = default['currency_from']
+    currency_to = request.args.get('currency_to')
+    if not currency_to:
+        currency_to = default['currency_to']
+    rate, currencies = get_currency(currency_from, currency_to)
+    return render_template('feed_news.html', news=articles,
+                           weather=weather, currency_from=currency_from,
+                           currency_to=currency_to, rate=rate, currencies=currencies)
 
 
 # @app.route('/', methods=['GET', 'POST'])
