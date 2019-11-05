@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<body>
+  <body>
     {% block form %}
     <form>
-        <div class="form-group mb-2 mt-2">
-            <label for="news_feed">News Feed</label>
-            <input type="text" name="news_feed" class="form-control mb-1" placeholder="Enter your feed rss">
-            <small class="form-text mb-1">This is for rss link</small>
-            <button type="submit" class="btn btn-primary btn-sm m-2">Submit</button>
-        </div>
+      <div class="form-group mb-2 mt-2">
+        <label for="news_feed">News Feed</label>
+        <input
+          type="text"
+          name="news_feed"
+          class="form-control mb-1"
+          placeholder="Enter your feed rss"
+        />
+        <small class="form-text mb-1"
+          >This is for rss link, such as: bbc, cnn, fox,iol
+        </small>
+        <button type="submit" class="btn btn-primary btn-sm m-2">Submit</button>
+      </div>
     </form>
     {% endblock %}
-</body>
-
+  </body>
 </html>
